@@ -50,13 +50,16 @@
         </div>
         <div class="card-body">
             <a href="{{ route('admin.kendaraan.create') }}" class="btn btn-primary">
-                + Tambah Kendaraan
+                + Add Vehicle
             </a>
             <a href="{{ route('admin.area.index') }}" class="btn btn-secondary">
-                Kelola Area
+                Area Management
             </a>
             <a href="{{ route('admin.users.index') }}" class="btn btn-info">
-                Kelola User
+                User Management
+            </a>
+            <a href="{{ route('admin.logs.index') }}" class="btn btn-warning">
+                Activity Logs
             </a>
         </div>
     </div>
