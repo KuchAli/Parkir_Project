@@ -26,7 +26,7 @@
             <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }} text-white rounded-3 mb-2" 
                href="{{ route('admin.users.index') }}">
                 <span class="d-flex align-items-center">
-                    <span class="flex-grow-1">Data Pengguna</span>
+                    <span class="flex-grow-1">User Management</span>
                     
                 </span>
             </a>
@@ -35,7 +35,7 @@
             <a class="nav-link {{ request()->routeIs('admin.kendaraan.index') ? 'active' : '' }} text-white rounded-3 mb-2" 
                 href="{{ route('admin.kendaraan.index') }}">
                 <span class="d-flex align-items-center">
-                    <span class="flex-grow-1">Data Kendaraan</span>
+                    <span class="flex-grow-1">Vehicle Management</span>
                     
                 </span>
             </a>
@@ -44,7 +44,7 @@
             <a class="nav-link {{ request()->routeIs('admin.area.index') ? 'active' : '' }} text-white rounded-3 mb-2" 
                 href="{{ route('admin.area.index') }}">
                 <span class="d-flex align-items-center">
-                    <span class="flex-grow-1">Data Area Parkir</span>
+                    <span class="flex-grow-1">Area Management</span>
                     
                 </span>
             </a>
@@ -53,7 +53,7 @@
             <a class="nav-link {{ request()->routeIs('admin.tarif.index') ? 'active' : '' }} text-white rounded-3 mb-2" 
                href="{{ route('admin.tarif.index') }}">
                 <span class="d-flex align-items-center">
-                    <span class="flex-grow-1">Data Tarif</span>
+                    <span class="flex-grow-1">Tarif Management</span>
                     
                 </span>
             </a>
@@ -70,7 +70,7 @@
             <a class="nav-link {{ request()->routeIs('logs.*') ? 'active' : '' }} text-white rounded-3 mb-2" 
                href="#">
                 <span class="d-flex align-items-center">
-                    <span class="flex-grow-1">Riwayat</span>
+                    <span class="flex-grow-1">Activity Logs</span>
                     
                 </span>
             </a>
@@ -93,7 +93,7 @@
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-                <li><hr class="dropdown-divider"></li>
+                
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
