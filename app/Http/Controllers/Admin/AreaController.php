@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AreaParkir;
 use Illuminate\Http\Request;
+use App\Models\Transaksi;
 
 class AreaController extends Controller
 {
@@ -23,14 +24,13 @@ class AreaController extends Controller
     {
         $request->validate([
             'nama_area' => 'required|string|max:255',
-            'lokasi'    => 'required|string|max:255',
             'kapasitas' => 'required|integer|min:1',
         ]);
 
         AreaParkir::create([
             'nama_area' => $request->nama_area,
-            'lokasi'    => $request->lokasi,
             'kapasitas' => $request->kapasitas,
+            'terisi' => 0, // Set default terisi ke 0 saat membuat area baru
         ]);
 
         return redirect()
@@ -47,13 +47,11 @@ class AreaController extends Controller
     {
         $request->validate([
             'nama_area' => 'required|string|max:255',
-            'lokasi'    => 'required|string|max:255',
             'kapasitas' => 'required|integer|min:1',
         ]);
 
         $area->update([
             'nama_area' => $request->nama_area,
-            'lokasi'    => $request->lokasi,
             'kapasitas' => $request->kapasitas,
         ]);
 
@@ -77,4 +75,19 @@ class AreaController extends Controller
                 ->with('error', 'Gagal menghapus area parkir');
         }
     }
+
+    //fungsi untuk menyinkronkan jumlah terisi di area parkir berdasarkan transaksi yang sedang aktif
+    public function syncTerisi()
+    {
+        $areas = AreaParkir::all();
+
+        foreach ($areas as $area) {
+            $real = Transaksi::where('id_area', $area->id)
+                            ->whereIn('status', ['masuk', 'keluar'])
+                            ->count();
+
+            $area->update(['terisi' => $real]);
+        }
+    }
+
 }
