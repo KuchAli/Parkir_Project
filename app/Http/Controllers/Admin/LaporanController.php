@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Log_Aktivitas;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
     public function index()
     {
-        return view('admin.laporan.index');
+        $logs = Log_Aktivitas::with('user')->orderBy('waktu_aktivitas', 'desc')->get();
+        return view('admin.logs.index', compact('logs'));
     }
 
-    public function generate(Request $request)
+    public function generate()
     {
-        $request->validate([
-            'id_user' => 'required|exists:users,id',
-            'aktivitas' => 'required|string',
-            'waktu_aktivitas' => 'required|date',
+        Log_Aktivitas::create([
+            'id_user' => Auth::id(),
+            'aktivitas' => 'Parkir Motor / Mobil',
+            'waktu_aktivitas' => now(),
         ]);
+
+        return back()->with('success', 'Log berhasil dibuat');
     }
+
 }

@@ -2,7 +2,7 @@
     {{-- Brand/Logo --}}
     <div class="w-100 text-center mb-4">
         <a class="navbar-brand" href="{{ url('/') }}">
-            <h4 class="mt-3 mb-0">Sistem Parkir</h4>
+            <h4 class="mt-3 mb-0">Parking System</h4>
         </a>
         
         {{-- Toggle button untuk mobile --}}
@@ -67,8 +67,8 @@
         
         {{-- Menu Pengaturan --}}
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('logs.*') ? 'active' : '' }} text-white rounded-3 mb-2" 
-               href="#">
+            <a class="nav-link {{ request()->routeIs('admin.logs.index') ? 'active' : '' }} text-white rounded-3 mb-2" 
+               href="{{ route('admin.logs.index') }}">
                 <span class="d-flex align-items-center">
                     <span class="flex-grow-1">Activity Logs</span>
                     
@@ -93,7 +93,7 @@
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-                
+
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

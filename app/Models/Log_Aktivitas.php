@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Log_Ativitas extends Model
+class Log_Aktivitas extends Model
 {
+    protected $table = 'log_aktivitas';
     protected $fillable = [
         'id_user',
         'aktivitas',
