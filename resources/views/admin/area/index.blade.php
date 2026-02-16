@@ -4,9 +4,9 @@
 <div class="container">
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Peminjaman</h5>
-            <a href="{{ route('admin.loans.create') }}" class="btn btn-primary btn-sm">
-                + Tambah Peminjaman
+            <h5 class="mb-0">Area Management</h5>
+            <a href="{{ route('admin.area.create') }}" class="btn btn-primary btn-sm">
+                + Add Area
             </a>
         </div>
 
@@ -20,12 +20,11 @@
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>User ID</th>
-                            <th>Approved By</th>
-                            <th>Loan Date</th>
-                            <th>Return Deadline</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
+                            <th>Area Name</th>
+                            <th>Capacity</th>
+                            <th>Amount</th>
+                            <th>Creation</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
