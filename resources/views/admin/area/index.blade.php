@@ -28,87 +28,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($peminjamans as $peminjaman)
+                        @forelse ($areas as $area)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
 
-                                <td>{{ $peminjaman->user->name }} (ID: {{ $peminjaman->user_id }})</td>
-
+                                <td>{{ $area->nama_area }}</td>
                                 <td>
-                                    {{ $peminjaman->approvedBy->name ?? '-' }}
+                                    {{ $area->kapasitas }}
                                 </td>
 
                                 <td>
-                                    {{ $peminjaman->loan_date
-                                        ? \Carbon\Carbon::parse($peminjaman->loan_date)->format('d-m-Y')
-                                        : '-' }}
+                                    {{ $area->terisi }}
                                 </td>
 
                                 <td>
-                                    {{ $peminjaman->return_deadline
-                                        ? \Carbon\Carbon::parse($peminjaman->return_deadline)->format('d-m-Y')
+                                    {{ $area->created_at
+                                        ? \Carbon\Carbon::parse($area->created_at)->format('d-m-Y')
                                         : '-' }}
                                 </td>
                                 <td>
-                                    @php
-                                        $status = strtolower($peminjaman->status);
-                                    @endphp
-
-                                    @if ($status === 'pending')
-                                        <span class="badge bg-warning text-dark">Pending</span>
-                                    @elseif ($status === 'approved')
-                                        <span class="badge bg-success">Approved</span>
-                                    @elseif ($status === 'rejected')
-                                        <span class="badge bg-danger">Rejected</span>
-                                    @elseif ($status === 'returned')
-                                        <span class="badge bg-primary">Returned</span>
-                                    @else
-                                        <span class="badge bg-secondary">Unknown</span>
-                                    @endif
-                                </td>
-
-                                <td>
-                                    @php
-                                        $status = strtolower($peminjaman->status);
-                                    @endphp
-                                    {{-- SETUJUI --}}
-                                    @if ($peminjaman->status === 'pending')
-                                        <form action="{{ route('admin.loans.approve', $peminjaman->id) }}"
-                                            method="POST" class="d-inline">
-                                            @csrf
-                                            <button class="btn btn-success btn-sm">
-                                                <i class="bi bi-check-lg"></i>
-                                            </button>
-                                        </form>
-
-                                        {{-- TOLAK --}}
-                                        <form action="{{ route('admin.loans.reject', $peminjaman->id) }}"
-                                            method="POST" class="d-inline">
-                                            @csrf
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="bi bi-x-lg"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-
-                                    {{-- SELESAIKAN --}}
-                                    @if ($peminjaman->status === 'approved')
-                                        <form action="{{ route('admin.loans.returned', $peminjaman->id) }}"
-                                            method="POST" class="d-inline">
-                                            @csrf
-                                            <button class="btn btn-primary btn-sm">
-                                                <i class="bi bi-box-arrow-in-down"></i>
-                                            </button>
-                                        </form>
-                                    @endif
-                                    
-                                    <form action="{{ route('admin.loans.destroy', $peminjaman->id) }}"
-                                          method="POST" class="d-inline">
+                                    <a href="{{ route('admin.area.edit', $area->id_area) }}" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form action="{{ route('admin.area.destroy', $area->id_area) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit"
-                                                class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Yakin hapus data?')">
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </form>
@@ -117,7 +62,7 @@
                         @empty
                             <tr>
                                 <td colspan="8" class="text-center">
-                                    Data peminjaman belum tersedia
+                                    Area data is not available
                                 </td>
                             </tr>
                         @endforelse
