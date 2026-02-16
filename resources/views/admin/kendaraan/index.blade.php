@@ -4,8 +4,8 @@
 <div class="container">
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Kendaraan</h5>
-            <a href="{{ route('admin.kendaraan.create') }}" class="btn btn-primary btn-sm">+ Tambah Kendaraan</a>
+            <h5 class="mb-0">Vehicle Management</h5>
+            <a href="{{ route('admin.kendaraan.create') }}" class="btn btn-primary btn-sm">+ Add Vehicle</a>
         </div>
 
         <div class="card-body m-5">
@@ -18,12 +18,12 @@
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>Plat Nomor</th>
-                            <th>Jenis Kendaraan</th>
-                            <th>Warna</th>
-                            <th>Pemilik</th>
+                            <th>Plate Number</th>
+                            <th>Vehicle Type</th>
+                            <th>Color</th>
+                            <th>Owner</th>
                             <th>User</th>
-                            <th>Aksi</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,7 +54,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Data kendaraan belum tersedia</td>
+                                <td colspan="7" class="text-center">Vehicle data is not available</td>
                             </tr>
                         @endforelse
                     </tbody>
