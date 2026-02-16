@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="card shadow-sm text-center">
                 <div class="card-body">
-                    <h6>Total Kendaraan</h6>
+                    <h6>Total Vehicles</h6>
                     <h3>{{ $totalVehicles }}</h3>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <div class="col-md-3">
             <div class="card shadow-sm text-center">
                 <div class="card-body">
-                    <h6>Total Pengguna</h6>
+                    <h6>Total Users</h6>
                     <h3>{{ $totalUsers }}</h3>
                 </div>
             </div>
@@ -46,19 +46,19 @@
     <!-- Quick Action -->
     <div class="card shadow-sm">
         <div class="card-header">
-            Aksi Cepat
+            <h5 class="mb-0">Quick Actions</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body align-items-center d-flex flex-wrap gap-2 justify-content-center">
             <a href="{{ route('admin.kendaraan.create') }}" class="btn btn-primary">
                 + Add Vehicle
             </a>
-            <a href="{{ route('admin.area.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.area.index') }}" class="btn btn-outline-secondary">
                 Area Management
             </a>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-info">
+            <a href="{{ route('admin.users.index') }}" class="btn btn-outline-secondary">
                 User Management
             </a>
-            <a href="{{ route('admin.logs.index') }}" class="btn btn-warning">
+            <a href="{{ route('admin.logs.index') }}" class="btn btn-outline-secondary">
                 Activity Logs
             </a>
         </div>
