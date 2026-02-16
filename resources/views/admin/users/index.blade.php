@@ -4,8 +4,8 @@
 <div class="container">
     <div class="card shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Data Pengguna</h5>
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">+ Tambah Pengguna</a>
+            <h5 class="mb-0">User Management</h5>
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">+ Add User</a>
         </div>
 
         <div class="card-body m-5">
@@ -15,19 +15,19 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle table-striped">
-                    <thead class="table-light">
-                        <tr>
+                    <thead class="table-light align-middle">
+                        <tr class="text-center">
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Name</th>
                             <th>Username</th>
                             <th>Role</th>
-                            <th>Dibuat</th>
-                            <th>Aksi</th>
+                            <th>Created</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="align-middle">
                         @forelse ($users as $user)
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->nama_lengkap }}</td>
                                 <td>{{ $user->username }}</td>
@@ -58,7 +58,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">Data pengguna belum tersedia</td>
+                                <td colspan="6" class="text-center">User data is not available</td>
                             </tr>
                         @endforelse
                     </tbody>
