@@ -13,30 +13,43 @@
             <form action="{{ route('admin.users.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="nama_lengkap" class="form-control" value="{{ old('nama_lengkap') }}" required>
                 </div>
 
 
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                    <label class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" value="{{ old('username') }}" required>
                 </div>
 
 
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" required>
+                    <div class="d-flex">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            class="form-control rounded-start me-3"
+                            autocomplete="new-password"
+                        >
+                        <button
+                            class="btn btn-secondary rounded-end"
+                            type="button"
+                            onclick="togglePassword()"
+                        >
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>  
                 </div>
 
 
                 <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select name="role_id" class="form-select" required>
-                        <option value="">-- Pilih Role --</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->role_name }}</option>
-                        @endforeach
+                    <label class="form-label">Status Active</label>
+                    <select name="status_aktif" class="form-select" required>
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
                     </select>
                 </div>
 
@@ -49,4 +62,13 @@
         </div>
     </div>
 </div>
+
+{{-- SCRIPT TOGGLE PASSWORD --}}
+<script>
+function togglePassword() {
+    const input = document.getElementById('password');
+    input.type = input.type === 'password' ? 'text' : 'password';
+}
+</script>
+
 @endsection

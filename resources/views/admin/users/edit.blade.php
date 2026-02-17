@@ -20,30 +20,30 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
+            <form action="{{ route('admin.users.update', $user->user_id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 {{-- NAMA --}}
                 <div class="mb-3">
-                    <label class="form-label">Nama</label>
+                    <label class="form-label">Full Name</label>
                     <input
                         type="text"
-                        name="name"
+                        name="nama_lengkap"
                         class="form-control"
-                        value="{{ old('name', $user->name) }}"
+                        value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
                         required
                     >
                 </div>
 
                 {{-- EMAIL --}}
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
+                    <label class="form-label">Username</label>
                     <input
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="username"
                         class="form-control"
-                        value="{{ old('email', $user->email) }}"
+                        value="{{ old('username', $user->username) }}"
                         required
                     >
                 </div>
@@ -55,38 +55,31 @@
                         <small class="text-muted">(Kosongkan jika tidak diubah)</small>
                     </label>
 
-                    <div class="input-group">
+                    <div class="d-flex">
                         <input
                             type="password"
                             name="password"
                             id="password"
-                            class="form-control"
+                            class="form-control rounded-start me-3"
                             autocomplete="new-password"
                         >
                         <button
-                            class="btn btn-outline-secondary"
+                            class="btn btn-secondary rounded-end"
                             type="button"
                             onclick="togglePassword()"
-                            title="Tampilkan / Sembunyikan Password"
                         >
                             <i class="bi bi-eye"></i>
                         </button>
                     </div>
                 </div>
 
-                {{-- ROLE --}}
+
+                {{-- STATUS AKTIF --}}
                 <div class="mb-3">
-                    <label class="form-label">Role</label>
-                    <select name="role_id" class="form-select" required>
-                        <option value="">-- Pilih Role --</option>
-                        @foreach ($roles as $role)
-                            <option
-                                value="{{ $role->id }}"
-                                {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}
-                            >
-                                {{ ucfirst($role->role_name) }}
-                            </option>
-                        @endforeach
+                    <label class="form-label">Status Active</label>
+                    <select name="status_aktif" class="form-select" required>
+                        <option value="1" {{ old('status_aktif', $user->status_aktif) == 1 ? 'selected' : '' }}>Aktif</option>
+                        <option value="0" {{ old('status_aktif', $user->status_aktif) == 0 ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                 </div>
 

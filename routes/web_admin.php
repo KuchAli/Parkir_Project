@@ -22,9 +22,9 @@ Route::prefix('admin')
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/create', [UserController::class, 'create'])->name('create');
             Route::post('/', [UserController::class, 'store'])->name('store');
-            Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
-            Route::put('/{id}', [UserController::class, 'update'])->name('update');
-            Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+            Route::get('/{user_id}/edit', [UserController::class, 'edit'])->name('edit');
+            Route::put('/{user_id}', [UserController::class, 'update'])->name('update');
+            Route::delete('/{user_id}', [UserController::class, 'destroy'])->name('destroy');
         });
 
         // ================= KENDARAAN CRUD =================
