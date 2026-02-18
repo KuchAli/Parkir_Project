@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card shadow-sm">
         <div class="card-header">
-            <h5 class="mb-0">Edit Kategori</h5>
+            <h5 class="mb-0">Edit Tarif</h5>
         </div>
 
         <div class="card-body m-5">
@@ -20,34 +20,26 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.categories.update', $category->id) }}"
+            <form action="{{ route('admin.tarif.update', $tarif->id_tarif) }}"
                   method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label">Nama Kategori</label>
-                    <input type="text"
-                           name="category_name"
-                           class="form-control"
-                           value="{{ old('category_name', $category->category_name) }}"
-                           required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Deskripsi</label>
-                    <textarea name="description"
-                              class="form-control"
-                              rows="3">{{ old('description', $category->description) }}</textarea>
+                    <label class="form-label">Tarif Rate</label>
+                    <input type="number" name="tarif_per_jam" class="form-control @error('tarif_per_jam') is-invalid @enderror" value="{{ old('tarif_per_jam', $tarif->tarif_per_jam) }}" required>
+                    @error('tarif_per_jam')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('admin.categories.index') }}"
+                    <a href="{{ route('admin.tarif.index') }}"
                        class="btn btn-secondary">
-                        Kembali
+                        Back
                     </a>
                     <button type="submit"
-                            class="btn btn-outline-success">
+                            class="btn btn-success">
                         Update
                     </button>
                 </div>

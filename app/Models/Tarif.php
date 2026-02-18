@@ -10,6 +10,8 @@ use App\Models\User;
 class Tarif extends Model
 {
     use HasFactory;
+    protected $table = 'tarifs';
+    protected $primaryKey = 'id_tarif';
 
     protected $fillable = [
         'jenis_kendaraan',

@@ -52,6 +52,8 @@ Route::prefix('admin')
             Route::get('/', [TarifController::class, 'index'])->name('index');
             Route::get('/create', [TarifController::class, 'create'])->name('create');
             Route::post('/', [TarifController::class, 'store'])->name('store');
+            Route::get('/{tarif}/edit', [TarifController::class, 'edit'])->name('edit');
+            Route::put('/{tarif}', [TarifController::class, 'update'])->name('update');
             Route::delete('/{tarif}', [TarifController::class, 'destroy'])->name('destroy');
         });
 

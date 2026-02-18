@@ -21,7 +21,7 @@ class TarifController extends Controller
 
     public function create()
     {
-        $users = User::orderBy('name')->get();
+        $users = User::orderBy('nama_lengkap')->get();
         return view('admin.tarif.create', compact('users'));
     }
 
@@ -42,6 +42,30 @@ class TarifController extends Controller
         return redirect()
             ->route('admin.tarif.index')
             ->with('success', 'Data berhasil dibuat');
+    }
+
+    public function edit(Tarif $tarif)
+    {
+        $tarif= Tarif::findOrFail($tarif->id_tarif);
+        return view('admin.tarif.edit', compact('tarif'));
+    }
+
+
+    public function update(Request $request, Tarif $tarif)
+    {
+        $tarif = Tarif::findOrFail($tarif->id_tarif);
+        $request->validate([
+            'tarif_per_jam'       => 'required|numeric|min:0',
+        ]);
+
+        $tarif->update([
+            'tarif_per_jam'   => $request->tarif_per_jam,
+            
+        ]);
+
+        return redirect()
+            ->route('admin.tarif.index')
+            ->with('success', 'Data berhasil diperbarui');
     }
 
     public function destroy(Tarif $tarif)
