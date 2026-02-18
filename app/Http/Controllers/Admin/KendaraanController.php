@@ -97,15 +97,11 @@ class KendaraanController extends Controller
         $kendaraan = Kendaraan::findOrFail($id);
 
         $request->validate([
-            'plat_nomor'       => 'required|string|max:15|unique:kendaraan,plat_nomor,' . $id . ',id_kendaraan',
-            'jenis_kendaraan'  => 'required|string|max:20',
-            'warna'            => 'nullable|string|max:20',
+            'warna'            => 'nullable|string|max:20'. $id . ',id_kendaraan'
             
         ]);
 
         $kendaraan->update([
-            'plat_nomor'      => $request->plat_nomor,
-            'jenis_kendaraan' => $request->jenis_kendaraan,
             'warna'           => $request->warna,
             
         ]);
