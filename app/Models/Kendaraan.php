@@ -13,13 +13,12 @@ class Kendaraan extends Model
         'plat_nomor',
         'jenis_kendaraan',
         'warna',
-        'pemilik',
-        'id_user',
+        'user_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user', 'id_user');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }
 

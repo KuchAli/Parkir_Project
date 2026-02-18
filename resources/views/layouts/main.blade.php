@@ -68,7 +68,7 @@
             font-size: 1.5rem;
         }
 
-        .card:hover {
+        .card-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
@@ -78,8 +78,18 @@
             border-radius: var(--border-radius);
             padding: 10px;
             box-shadow: var(--box-shadow);
-            transition: var(--transition);
         }
+        
+        .card-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 10px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            
+        }
+
+       
 
         .btn {
             padding: 12px 25px;

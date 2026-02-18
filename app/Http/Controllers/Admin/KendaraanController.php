@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class KendaraanController extends Controller
 {
@@ -14,7 +14,34 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        $kendaraan = Kendaraan::with('user')->latest()->get();
+         $sortMap = [
+            'newest' => ['created_at', 'desc'],
+            'oldest' => ['created_at', 'asc'],
+            'plat_nomor' => ['plat_nomor', 'asc'],
+            'jenis_kendaraan' => ['jenis_kendaraan', 'asc'],
+        ];
+        
+        $query = Kendaraan::query();
+
+        //search & sort
+
+        if (request()->has('search')) {
+            $search = request('search');
+            $query = Kendaraan::where('plat_nomor', 'like', "%$search%")
+                ->orWhere('jenis_kendaraan', 'like', "%$search%");
+        } else {
+            $query = Kendaraan::query();
+        }
+
+
+        if (request()->has('sort') && isset($sortMap[request('sort')])) {
+            $query->orderBy(...$sortMap[request('sort')]);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $kendaraan = $query->paginate(3)->withQueryString();
+
        
         return view('admin.kendaraan.index', compact('kendaraan'));
     }
@@ -24,7 +51,8 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        return view('admin.kendaraan.create');
+        $users = User::all();
+        return view('admin.kendaraan.create', compact('users'));
     }
 
     /**
@@ -34,17 +62,17 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'plat_nomor'       => 'required|string|max:15|unique:kendaraan,plat_nomor',
-            'jenis_kendaraan'  => 'required|string|max:20',
+            'jenis_kendaraan'  => 'required|string|',
             'warna'            => 'nullable|string|max:20',
-            'pemilik'          => 'nullable|string|max:100',
+            'user_id'          => 'required|exists:user,user_id'
+
         ]);
 
         Kendaraan::create([
             'plat_nomor'      => $request->plat_nomor,
             'jenis_kendaraan' => $request->jenis_kendaraan,
             'warna'           => $request->warna,
-            'pemilik'         => $request->pemilik,
-            'id_user'         => Auth::id(), // user yang login
+            'user_id'         => $request->user_id, 
         ]);
 
         return redirect()
@@ -72,14 +100,14 @@ class KendaraanController extends Controller
             'plat_nomor'       => 'required|string|max:15|unique:kendaraan,plat_nomor,' . $id . ',id_kendaraan',
             'jenis_kendaraan'  => 'required|string|max:20',
             'warna'            => 'nullable|string|max:20',
-            'pemilik'          => 'nullable|string|max:100',
+            
         ]);
 
         $kendaraan->update([
             'plat_nomor'      => $request->plat_nomor,
             'jenis_kendaraan' => $request->jenis_kendaraan,
             'warna'           => $request->warna,
-            'pemilik'         => $request->pemilik,
+            
         ]);
 
         return redirect()

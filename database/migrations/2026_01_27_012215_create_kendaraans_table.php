@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('plat_nomor', 15);
             $table->string('jenis_kendaraan', 20);
             $table->string('warna', 20);
-            $table->string('pemilik', 100);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
