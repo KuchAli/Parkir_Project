@@ -11,7 +11,26 @@ class AreaController extends Controller
 {
     public function index()
     {
-        $areas = AreaParkir::all();
+        $sortMap = [
+            'nama_area' => ['nama_area', 'asc'],
+            'kapasitas' => ['kapasitas', 'desc'],
+        ];
+        $query = AreaParkir::query();
+
+        if (request()->has('search')) {
+            $search = request('search');
+            $query = AreaParkir::where('nama_area', 'like', "%$search%");
+        } else {
+            $query = AreaParkir::query();
+        }
+
+        if (request()->has('sort') && isset($sortMap[request('sort')])) {
+            $query->orderBy(...$sortMap[request('sort')]);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $areas = $query->paginate(3)->withQueryString();
         return view('admin.area.index', compact('areas'));
     }
 

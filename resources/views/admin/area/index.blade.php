@@ -18,6 +18,40 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             @endif
+            <div class="card-container border-0 rounded mb-4">
+                <!-- Search & Sort -->
+                <form method="GET" action="{{ route('admin.area.index') }}" 
+                    class="row g-3 align-items-end">
+
+                    <div class="col-md-4">
+                        <label for="search" class="form-label mb-1 ">Search</label>
+                        <input 
+                            type="text" 
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Search area ..."
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="sort" class="form-label mb-1">Sort By</label>
+                        <select name="sort" onchange="this.form.submit()"
+                                class="form-select">
+                            <option value="nama_area" {{ request('sort')=='nama_area'?'selected':'' }}>Area Name</option>
+                            <option value="kapasitas" {{ request('sort')=='kapasitas'?'selected':'' }}>Capacity</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 ms-auto d-flex justify-content-end">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
 
             <!-- Table -->
             <div class="overflow-x-auto ms-2">
@@ -83,6 +117,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="mt-3">
+                    {{ $areas->links() }}
+                </div>
             </div>
 
         </div>
