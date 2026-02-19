@@ -116,10 +116,10 @@
                         @endforelse
                     </tbody>
 
-                    <div class="mt-3">
-                        {{ $kendaraan->links() }}
-                    </div>
                 </table>
+                <div class="mt-3">
+                    {{ $kendaraan->links() }}
+                </div>
             </div>
         </div>
     </div>
