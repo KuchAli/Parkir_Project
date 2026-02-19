@@ -63,5 +63,57 @@
             </a>
         </div>
     </div>
+    
+    <div class="card shadow-sm mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Log Activity</h5>
+        </div>
+        <div class="overflow-x-auto ms-2">
+            <table class="attendance-table border text-center align-middle">
+                <thead class="border">
+                    <tr>
+                        <th class="py-3 px-2 text-center">No</th>
+                        <th class="py-3 px-2 text-center">User</th>
+                        <th class="py-3 px-2 text-center">Activity</th>
+                        <th class="py-3 px-2 text-center">Timestamp</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-gray-700">
+                    @forelse ($logs as $log)
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="py-3 px-2">
+                            {{ $loop->iteration }}
+                        </td>
+
+                        <td class="py-3 px-2 font-medium">
+                            {{ $log->user->nama_lengkap ?? 'Unknown User' }}
+                        </td>
+
+                        <td class="py-3 px-2">
+                            {{ $log->aktivitas }}
+                        </td>
+
+                        <td class="py-3 px-2">
+                            {{ \Carbon\Carbon::parse($log->waktu_aktivitas)->format('d-m-Y H:i:s') }}
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="py-6 text-center text-gray-400">
+                            No activity logs available
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+
+            </table>
+            <div class="mt-3">
+                {{ $logs->links() }}
+            </div>
+        </div>
+    </div>
+
+
 </div>
 @endsection

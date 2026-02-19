@@ -7,6 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\User;
 use App\Models\AreaParkir;
 use App\Models\Tarif;
+use App\Models\Log_Aktivitas;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,9 @@ class DashboardController extends Controller
         $totalUsers = User::count();
         $totalAreas = AreaParkir::count();
         $totalTarif = Tarif::count();
+
+        $logs = Log_Aktivitas::with('user')->orderBy('waktu_aktivitas', 'desc')->paginate(3);
         
-        return view('admin.dashboard', compact('totalVehicles', 'totalUsers', 'totalAreas', 'totalTarif'));
+        return view('admin.dashboard', compact('totalVehicles', 'totalUsers', 'totalAreas', 'totalTarif', 'logs'));
     }
 }
