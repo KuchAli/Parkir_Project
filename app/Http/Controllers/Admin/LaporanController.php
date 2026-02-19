@@ -40,12 +40,12 @@ class LaporanController extends Controller
     {
         $logs = Log_Aktivitas::all();
         foreach ($logs as $log) {
-                $aktivitas = Transaksi::where('id_transaksi', $log->id)
+                $aktivitas = Transaksi::where('id_parkir', $log->id)
                                     ->whereIn('status', ['masuk', 'keluar']) 
                                     ->first();   
 
                 $log->create([
-                    'id_user' => $log->user_id,
+                    'user_id' => $log->user_id,
                     'aktivitas' => $aktivitas ? $aktivitas->status : 'masuk/keluar',
                     'waktu_aktivitas' => $log->waktu_aktivitas->now(),
                 ]);
