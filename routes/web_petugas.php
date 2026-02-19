@@ -15,18 +15,20 @@ Route::prefix('petugas')
             ->name('dashboard');
 
         // ================= STRUK PARKIR =================
-        Route::get('/parkir/{id}/struk', [ParkirController::class, 'struk'])
+        Route::get('/parkir/{transaksi}/struk', [ParkirController::class, 'struk'])
             ->name('parkir.struk');
         
         //=================== Transaksi =================
         Route::get('/transaksi', [TransaksiController::class, 'index'])
             ->name('transaksi.index');
-        Route::get('/transaksi/create', [TransaksiController::class, 'create'])
+            Route::get('/transaksi/create', [TransaksiController::class, 'create'])
             ->name('transaksi.create');
-        Route::post('/transaksi', [TransaksiController::class, 'store'])
-            ->name('transaksi.store');
-        Route::put('/transaksi/{transaksi}/keluar', [TransaksiController::class, 'keluar'])
+            Route::post('/transaksi/masuk', [TransaksiController::class, 'masuk'])
+            ->name('transaksi.masuk');
+            Route::put('/transaksi/{transaksi}/keluar', [TransaksiController::class, 'keluar'])
             ->name('transaksi.keluar');
+            Route::get('/transaksi/{transaksi}',[TransaksiController::class,'show'])
+                ->name('transaksi.detail');
     });
 
 ?>

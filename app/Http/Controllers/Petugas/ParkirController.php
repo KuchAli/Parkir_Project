@@ -7,10 +7,9 @@ use App\Models\Transaksi;
 
 class ParkirController extends Controller
 {
-    public function struk($id)
+    public function struk(Transaksi$transaksi)
     {
-        $parkir= Transaksi::with(['user', 'area_parkir', 'tarif','kendaraan'])
-            ->findOrFail($id);
+        $parkir=$transaksi->load(['user', 'area', 'tarif','kendaraan']);
         return view('petugas.parkir.struk', compact('parkir'));
     }
 }
