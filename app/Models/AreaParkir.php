@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class AreaParkir extends Model
 {
     protected $table = 'area_parkir';
+    protected $primaryKey = 'id_area';
     protected $fillable = [
         'nama_area',
-        'lokasi',
         'kapasitas',
         'terisi',
 

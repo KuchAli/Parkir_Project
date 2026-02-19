@@ -42,9 +42,9 @@ Route::prefix('admin')
             Route::get('/', [AreaController::class, 'index'])->name('index');
             Route::get('/create', [AreaController::class, 'create'])->name('create');
             Route::post('/', [AreaController::class, 'store'])->name('store');
-            Route::get('/{id}/edit', [AreaController::class, 'edit'])->name('edit');
-            Route::put('/{id}', [AreaController::class, 'update'])->name('update');
-            Route::delete('/{id}', [AreaController::class, 'destroy'])->name('destroy');
+            Route::get('/{area}/edit', [AreaController::class, 'edit'])->name('edit');
+            Route::put('/{area}', [AreaController::class, 'update'])->name('update');
+            Route::delete('/{area}', [AreaController::class, 'destroy'])->name('destroy');
         });
 
         // ================= Tarif ALAT =================
