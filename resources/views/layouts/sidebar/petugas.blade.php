@@ -56,7 +56,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('logout' ) }}">
                         @csrf
                         <button type="submit" class="dropdown-item rounded-2 text-danger">Logout</button>
                     </form>
