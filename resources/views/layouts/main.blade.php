@@ -192,6 +192,31 @@
             display: flex;
             flex-wrap: nowrap;
         }
+
+       .nav-strip {
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .nav-strip::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #f2f3f4; /* warna biru bootstrap */
+            transition: width 0.3s ease;
+        }
+
+        .nav-strip:hover::after {
+            width: 100%;
+        }
+
+        .nav-strip.active::after {
+            width: 100%;
+        }
+        
         
         /* Responsive */
         @media (max-width: 768px) {
@@ -208,12 +233,27 @@
 
 <div class="container-fluid px-0">
     <div class="row g-0">
-        {{-- Sidebar --}}
-        <div class="col-lg-2 col-md-3 d-md-block sidebar bg-dark text-white">
-            <aside class="bg-dark text-white p-3" style="width: 250px;">
-                @include('layouts.sidebar.' . auth()->user()->role)
-            </aside>
-        </div>
+        @php
+            $role = auth()->user()->role;
+        @endphp
+
+        @if($role === 'owner')
+
+            {{-- ================= NAVBAR OWNER ================= --}}
+            <div class="col-12">
+                @include('layouts.navbar.owner')
+            </div>
+
+        @else
+
+            {{-- ================= SIDEBAR ADMIN & PETUGAS ================= --}}
+            <div class="col-lg-2 col-md-3 d-md-block sidebar bg-dark text-white">
+                <aside class="bg-dark text-white p-3" style="width: 250px;">
+                    @include('layouts.sidebar.' . $role)
+                </aside>
+            </div>
+
+        @endif
 
         {{-- Konten Utama --}}
         <div class="col-lg-10 col-md-9 main-content">

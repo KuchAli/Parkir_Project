@@ -18,4 +18,6 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 require __DIR__.'/web_admin.php';
 
 require __DIR__.'/web_petugas.php'; 
+
+require __DIR__.'/web_owner.php';
     
