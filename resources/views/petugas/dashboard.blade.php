@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    <h4 class="mb-4">Dashboard Petugas</h4>
+    <h4 class="mb-4">Petugas Dashboard</h4>
 
     <div class="row">
 
@@ -11,7 +11,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm text-center">
                 <div class="card-body">
-                    <h6>Kendaraan Masuk Hari Ini</h6>
+                    <h6>Vehicle Entry Today</h6>
                     <h3>{{ $masukHariIni }}</h3>
                 </div>
             </div>
@@ -21,7 +21,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm text-center">
                 <div class="card-body">
-                    <h6>Kendaraan Keluar Hari Ini</h6>
+                    <h6>Vehicle Out Today</h6>
                     <h3>{{ $keluarHariIni }}</h3>
                 </div>
             </div>
@@ -41,7 +41,7 @@
 
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
-            Informasi Area Parkir
+            Area Parkir Information
         </div>
          <div class="card-container border-0 rounded mb-2">
             <div class="col-md-2">
@@ -61,9 +61,9 @@
             <table class="attendance-table border text-center align-middle">
                 <thead>
                     <tr>
-                        <th class="text-center">Nama Area</th>
-                        <th class="text-center">Kapasitas</th>
-                        <th class="text-center">Terisi</th>
+                        <th class="text-center">Area Name</th>
+                        <th class="text-center">Capacity</th>
+                        <th class="text-center">Filled</th>
                         <th class="text-center">Sisa</th>
                     </tr>
                 </thead>
