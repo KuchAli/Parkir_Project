@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $sort = request('sort');
 
         if ($sort === 'sisa') {
-            $query->orderByRaw('kapasitas - terisi asc');
+            $query->orderByRaw('kapasitas - terisi desc');
         } else {
 
             $sortMap = [

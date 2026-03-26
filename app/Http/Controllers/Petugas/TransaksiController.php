@@ -7,7 +7,7 @@ use App\Models\AreaParkir;
 use App\Models\Transaksi;
 use App\Models\Kendaraan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
 
@@ -15,9 +15,20 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $transaksi = Transaksi::with(['user', 'area', 'tarif', 'kendaraan'])
-            ->latest()
-            ->get();
+
+        $query = Transaksi::with('kendaraan','user','tarif','area')
+            ->latest('waktu_masuk');;
+
+        if (request()->has('search')) {
+            $search = request('search');
+
+            $query->whereHas('kendaraan', function ($q) use ($search) {
+                $q->where('plat_nomor', 'like', "%$search%")
+                ->orWhere('jenis_kendaraan', 'like', "%$search%");
+            });
+        }
+
+        $transaksi = $query->paginate(5)->withQueryString();
 
         return view('petugas.transaksi.index', compact('transaksi'));
     }
@@ -27,20 +38,23 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::with(['user', 'area', 'tarif', 'kendaraan'])->findOrFail($id);
         $kendaraan = Kendaraan::all();
         $area = AreaParkir::all();
-        return view ('petugas.transaksi.detail', compact('transaksi','kendaraan','area'));
+        $user= User::all();
+        return view ('petugas.transaksi.detail', compact('transaksi','kendaraan','area','user'));
     }
 
     public function create(){
         $transaksi = Transaksi::with(['user','area','tarif','kendaraan'])->get();
         $kendaraan = Kendaraan::all();
         $area = AreaParkir::all();
-        return view('petugas.transaksi.create', compact('transaksi', 'kendaraan', 'area'));
+        $user = User::all();
+        return view('petugas.transaksi.create', compact('transaksi', 'kendaraan', 'area','user'));
     }
     
 
    public function masuk(Request $request)
     {
         $request->validate([
+            'user_id'=>'required|exists:user,user_id',
             'id_kendaraan' => 'required|exists:kendaraan,id_kendaraan',
             'id_area' => 'required|exists:area_parkir,id_area'
         ]);
@@ -69,7 +83,7 @@ class TransaksiController extends Controller
 
         // Buat transaksi
         Transaksi::create([
-            'user_id' => Auth::id(),
+            'user_id'=> $request->user_id,
             'id_kendaraan' => $request->id_kendaraan,
             'id_area' => $request->id_area,
             'waktu_masuk' => now(),
