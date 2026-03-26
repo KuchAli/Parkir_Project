@@ -10,6 +10,14 @@
         <div class="card-body m-5">
             <form action="{{ route('petugas.transaksi.masuk') }}" method="POST">
                 @csrf
+                <div class="mb-3">
+                    <label>User</label>
+                    <select name="user_id" class="form-control" required>
+                        @foreach($user as $u)
+                            <option value="{{ $u->user_id }}">{{ $u->nama_lengkap }} </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="mb-3">
                     <label>Kendaraan</label>
