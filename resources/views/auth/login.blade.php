@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #1f2231 0%, #7a7878 100%);
+            background: linear-gradient(135deg, #2d3250 0%, #0f1315 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,7 +22,7 @@
         .logo {
             font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #0d0b0b 0%, #ebdede 100%);
+            background: linear-gradient(135deg, #0d0b0b 0%, #135ba9 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -64,7 +64,7 @@
             <div class="col-md-5">
                 <div class="login-card p-5">
                     <div class="text-center mb-4">
-                        <div class="logo">Sistem Parkir</div>
+                        <div class="logo">Parking Application</div>
                         <p class="text-muted">Silakan login untuk melanjutkan</p>
                     </div>
 
@@ -85,7 +85,7 @@
                                    value="{{ old('username') }}" required autofocus>
                         </div>
                         
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="password" class="form-label">Password</label>
                             <div class="password-wrapper">
                                 <input type="password" class="form-control" id="password" name="password" required>
@@ -95,10 +95,6 @@
                             </div>
                         </div>
                         
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label" for="remember">Ingat saya</label>
-                        </div>
                         
                         <button type="submit" class="btn btn-outline-secondary w-100 mb-3">Login</button>
                         
