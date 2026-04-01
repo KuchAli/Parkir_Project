@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         body {
-            background: linear-gradient(135deg, #1f2231 0%, #7a7878 100%);
+            background: linear-gradient(135deg, #2d3250 0%, #0f1315 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -22,7 +22,7 @@
         .logo {
             font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #0d0b0b 0%, #ebdede 100%);
+            background: linear-gradient(135deg, #0d0b0b 0%, #135ba9 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -83,8 +83,8 @@
             <div class="col-md-5">
                 <div class="register-card p-5">
                     <div class="text-center mb-4">
-                        <div class="logo">Peminjaman Alat</div>
-                        <p class="text-muted">Buat akun baru</p>
+                        <div class="logo">Parking Application</div>
+                        <p class="text-muted">Sign Up</p>
                     </div>
 
                     @if ($errors->any())
@@ -99,7 +99,7 @@
                         @csrf
                         
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <label for="name" class="form-label">Full Name</label>
                             <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" 
                                    value="{{ old('nama_lengkap') }}" required autofocus>
                         </div>
@@ -122,11 +122,11 @@
                                 </button>
                             </div>
                             <div class="password-strength" id="password-strength"></div>
-                            <small class="text-muted">Minimal 8 karakter</small>
+                            <small class="text-muted">8 Character minim for Password</small>
                         </div>
                         
                         <div class="mb-4">
-                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                            <label for="password_confirmation" class="form-label">Password Confirmation</label>
                             <div class="password-wrapper">
                                 <input type="password" class="form-control password-field" 
                                        id="password_confirmation" name="password_confirmation" required>
@@ -141,8 +141,8 @@
                         <button type="submit" class="btn btn-outline-secondary w-100 mb-3">Register</button>
                         
                         <div class="text-center">
-                            <p class="mb-0">Sudah punya akun? 
-                                <a href="{{ route('login') }}" class="text-decoration-none">Login disini</a>
+                            <p class="mb-0">Have account? 
+                                <a href="{{ route('login') }}" class="text-decoration-none">Login here</a>
                             </p>
                         </div>
                     </form>

@@ -65,7 +65,7 @@
                 <div class="login-card p-5">
                     <div class="text-center mb-4">
                         <div class="logo">Parking Application</div>
-                        <p class="text-muted">Silakan login untuk melanjutkan</p>
+                        <p class="text-muted">Lets Sign In</p>
                     </div>
 
                     @if ($errors->any())
@@ -99,7 +99,7 @@
                         <button type="submit" class="btn btn-outline-secondary w-100 mb-3">Login</button>
                         
                         <div class="text-center">
-                            <p class="mb-0">Belum punya akun? 
+                            <p class="mb-0">Don't have account? 
                                 <a href="{{ route('register') }}" class="text-decoration-none">Register disini</a>
                             </p>
                         </div>
