@@ -7,7 +7,7 @@ use App\Models\Kendaraan;
 use App\Models\User;
 use App\Models\AreaParkir;
 use App\Models\Tarif;
-use App\Models\Log_Aktivitas;
+use App\Models\Transaksi;
 
 class DashboardController extends Controller
 {
@@ -18,7 +18,32 @@ class DashboardController extends Controller
         $totalAreas = AreaParkir::count();
         $totalTarif = Tarif::count();
 
-        $logs = Log_Aktivitas::with('user')->orderBy('waktu_aktivitas', 'desc')->paginate(3);
+        $sortMap = [
+            'newest' => ['created_at', 'desc'],
+            'oldest' => ['created_at', 'asc'],
+        ];
+
+        $query = Transaksi::with('user');
+
+        // SEARCH
+        if (request()->has('search') && request('search') != '') {
+            $search = request('search');
+
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%$search%")
+                ->orWhere('username', 'like', "%$search%");
+            });
+        }
+
+        // SORT
+        if (request()->has('sort') && isset($sortMap[request('sort')])) {
+            $query->orderBy(...$sortMap[request('sort')]);
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $logs = $query->paginate(3)->withQueryString();
+
         
         return view('admin.dashboard', compact('totalVehicles', 'totalUsers', 'totalAreas', 'totalTarif', 'logs'));
     }

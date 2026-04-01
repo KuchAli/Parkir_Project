@@ -65,8 +65,6 @@ Route::prefix('admin')
             Route::get('/', [LaporanController::class, 'index'])
                 ->name('index');
 
-            Route::get('/{id}', [LaporanController::class, 'show'])
-                ->name('show');
 
         });
     });

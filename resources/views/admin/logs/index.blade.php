@@ -17,7 +17,7 @@
             <div class="card-container border-0 rounded mb-4">
                 <!-- Search & Sort -->
                 <form method="GET" action="{{ route('admin.logs.index') }}" 
-                    class="row g-3 align-items-end">
+                    class="row g-3 align-items-end mb-3">
 
                     <div class="col-md-4">
                         <label for="search" class="form-label mb-1 ">Search</label>
@@ -72,11 +72,17 @@
                             </td>
 
                             <td class="py-3 px-2">
-                                {{ $log->aktivitas }}
+                                @if (strtolower($log->status) == 'masuk')
+                                    <span class="badge bg-success">Masuk</span>
+                                @elseif (strtolower($log->status) == 'keluar')
+                                    <span class="badge bg-danger">Keluar</span>
+                                @else
+                                    <span class="badge bg-secondary">{{ $log->status }}</span>
+                                @endif
                             </td>
 
                             <td class="py-3 px-2">
-                                {{ \Carbon\Carbon::parse($log->waktu_aktivitas)->format('d-m-Y H:i:s') }}
+                                {{ \Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s') }}
                             </td>
                         </tr>
                         @empty

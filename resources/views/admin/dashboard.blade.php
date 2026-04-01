@@ -68,6 +68,40 @@
         <div class="card-header">
             <h5 class="mb-0">Log Activity</h5>
         </div>
+         <div class="card-container border-0 rounded mb-4">
+                <!-- Search & Sort -->
+                <form method="GET" action="{{ route('admin.dashboard') }}" 
+                    class="row g-3 align-items-end mb-3">
+
+                    <div class="col-md-4">
+                        <label for="search" class="form-label mb-1 ">Search</label>
+                        <input 
+                            type="text" 
+                            name="search"
+                            value="{{ request('search') }}"
+                            placeholder="Search name ..."
+                            class="form-control"
+                        >
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="sort" class="form-label mb-1">Sort By</label>
+                        <select name="sort" onchange="this.form.submit()"
+                                class="form-select">
+                            <option value="newest" {{ request('sort')=='newest'?'selected':'' }}>Newest</option>
+                            <option value="oldest" {{ request('sort')=='oldest'?'selected':'' }}>Oldest</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 ms-auto d-flex justify-content-end">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
         <div class="overflow-x-auto ms-2">
             <table class="attendance-table border text-center align-middle">
                 <thead class="border">
@@ -90,12 +124,17 @@
                             {{ $log->user->nama_lengkap ?? 'Unknown User' }}
                         </td>
 
-                        <td class="py-3 px-2">
-                            {{ $log->aktivitas }}
+                         <td class="py-3 px-2">
+                            @if (strtolower($log->status) == 'masuk')
+                                <span class="badge bg-success">Masuk</span>
+                            @elseif (strtolower($log->status) == 'keluar')
+                                <span class="badge bg-danger">Keluar</span>
+                            @else
+                                <span class="badge bg-secondary">{{ $log->status }}</span>
+                            @endif
                         </td>
-
                         <td class="py-3 px-2">
-                            {{ \Carbon\Carbon::parse($log->waktu_aktivitas)->format('d-m-Y H:i:s') }}
+                            {{ \Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s') }}
                         </td>
                     </tr>
                     @empty
