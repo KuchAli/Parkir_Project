@@ -12,19 +12,19 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $start = $request->start_date 
-            ? Carbon::parse($request->start_date)->startOfDay()
-            : Carbon::today()->startOfDay();
+        $query = Transaksi::whereHas('kendaraan', function($q){
+            $q->where('user_id', Auth::id());
+        });
 
-        $end = $request->end_date 
-            ? Carbon::parse($request->end_date)->endOfDay()
-            : Carbon::today()->endOfDay();
+        $start = null;
+        $end = null;
 
-        // Query khusus transaksi milik user login
-        $query = Transaksi::whereBetween('waktu_masuk', [$start, $end])
-            ->whereHas('kendaraan', function($q){
-                $q->where('user_id', Auth::id());
-            });
+        if ($request->start_date && $request->end_date) {
+            $start = Carbon::parse($request->start_date)->startOfDay();
+            $end = Carbon::parse($request->end_date)->endOfDay();
+
+            $query->whereBetween('waktu_masuk', [$start, $end]);
+        }
 
         $totalTransaksi = $query->count();
 
@@ -39,6 +39,7 @@ class DashboardController extends Controller
             'totalTransaksi',
             'totalPengeluaran',
             'transaksi',
+            'query',
             'start',
             'end'
         ));

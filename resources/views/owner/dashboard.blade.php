@@ -30,8 +30,12 @@
                         <div class="card-body">
                             <h6 class="text-muted">Total Transaksi</h6>
                             <h3 class="fw-bold">{{ $totalTransaksi }}</h3>
-                            <small class="text-muted">
-                                {{ $start->format('d M Y') }} - {{ $end->format('d M Y') }}
+                           <small class="text-muted">
+                                @if($start && $end)
+                                    {{ $start->format('d M Y') }} - {{ $end->format('d M Y') }}
+                                @else
+                                    Semua Data
+                                @endif
                             </small>
                         </div>
                     </div>
