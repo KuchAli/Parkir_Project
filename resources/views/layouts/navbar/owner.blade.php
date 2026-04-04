@@ -26,6 +26,12 @@
                            Home
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-strip {{ request()->routeIs('owner.kendaraan.index') ? 'active fw-semibold' : '' }}"
+                        href="{{ route('owner.kendaraan.index') }}">
+                           My Vehicle
+                        </a>
+                    </li>
                 </ul>
 
                 {{-- User Dropdown --}}
