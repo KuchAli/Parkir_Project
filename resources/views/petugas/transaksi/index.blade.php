@@ -48,7 +48,7 @@
                     <tbody class="text-center">
                         @forelse($transaksi as $index => $t)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>PKR-{{ str_pad($t->id_parkir, 3, '0', STR_PAD_LEFT) }}</td>
                                 <td>{{ $t->kendaraan->plat_nomor ?? '-' }}</td>
                                 <td>{{ $t->user->nama_lengkap ?? '-' }}</td>
                                 <td>{{ $t->area->nama_area ?? '-' }}</td>

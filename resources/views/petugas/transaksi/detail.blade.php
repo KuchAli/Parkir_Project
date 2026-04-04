@@ -10,6 +10,10 @@
     </div>
     <div class="card-body">
         <div class="row mb-2">
+            <div class="col-md-4 fw-bold">Parkir Number:</div>
+            <div class="col-md-8"> PKR-{{ str_pad($transaksi->id_parkir, 3, '0', STR_PAD_LEFT) }}</div>
+        </div>
+        <div class="row mb-2">
             <div class="col-md-4 fw-bold">Plate Number:</div>
             <div class="col-md-8">{{ $transaksi->kendaraan->plat_nomor }}</div>
         </div>

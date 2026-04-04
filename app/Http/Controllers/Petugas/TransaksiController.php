@@ -19,14 +19,25 @@ class TransaksiController extends Controller
         $query = Transaksi::with('kendaraan','user','tarif','area')
             ->latest('waktu_masuk');;
 
-        if (request()->has('search')) {
+       if (request()->has('search')) {
             $search = request('search');
 
-            $query->whereHas('kendaraan', function ($q) use ($search) {
-                $q->where('plat_nomor', 'like', "%$search%")
-                ->orWhere('jenis_kendaraan', 'like', "%$search%");
+            // ambil angka dari PKR-004 → 4
+            $numericSearch = preg_replace('/[^0-9]/', '', $search);
+
+            $query->where(function ($q) use ($search, $numericSearch) {
+
+            // cari berdasarkan relasi kendaraan (plat nomor)
+            $q->whereHas('kendaraan', function ($q2) use ($search) {
+                $q2->where('plat_nomor', 'like', "%$search%");
             });
-        }
+
+            // cari berdasarkan id_parkir (di transaksi)
+            if ($numericSearch) {
+                $q->orWhere('id_parkir', $numericSearch);
+            }
+        });
+}
 
         $transaksi = $query->paginate(5)->withQueryString();
 
@@ -44,9 +55,11 @@ class TransaksiController extends Controller
 
     public function create(){
         $transaksi = Transaksi::with(['user','area','tarif','kendaraan'])->get();
-        $kendaraan = Kendaraan::all();
+        $kendaraan = Kendaraan::whereHas('user', function ($query) {
+             $query->where('role', 'owner');
+        })->get();
         $area = AreaParkir::all();
-        $user = User::all();
+        $user = User::where('role', 'owner')->get();
         return view('petugas.transaksi.create', compact('transaksi', 'kendaraan', 'area','user'));
     }
     
