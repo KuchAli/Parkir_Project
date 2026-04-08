@@ -81,7 +81,7 @@
                                         @if($t->status == 'keluar')
                                             <a href="{{ route('petugas.parkir.struk', $t->id_parkir) }}"
                                                class="btn btn-sm btn-primary"
-                                               target="_blank">
+                                              >
                                                 Struk
                                             </a>
                                         @endif
