@@ -51,7 +51,7 @@ class KendaraanController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::where('role', 'owner')->get();
         return view('admin.kendaraan.create', compact('users'));
     }
 
@@ -62,7 +62,7 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'plat_nomor'       => 'required|string|max:15|unique:kendaraan,plat_nomor',
-            'jenis_kendaraan'  => 'required|string|',
+            'jenis_kendaraan'  => 'required|in:mobil,motor,truck,bus',
             'warna'            => 'nullable|string|max:20',
             'user_id'          => 'required|exists:user,user_id'
 

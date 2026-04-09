@@ -28,7 +28,7 @@
                     <select name="jenis_kendaraan" class="form-select @error('jenis_kendaraan') is-invalid @enderror">
                         <option value="mobil" {{ old('jenis_kendaraan') == 'mobil' ? 'selected' : '' }}>Mobil</option>
                         <option value="motor" {{ old('jenis_kendaraan') == 'motor' ? 'selected' : '' }}>Motor</option>
-                        <option value="truk" {{ old('jenis_kendaraan') == 'truk' ? 'selected' : '' }}>Truk</option>
+                        <option value="truck" {{ old('jenis_kendaraan') == 'truck' ? 'selected' : '' }}>Truk</option>
                         <option value="bus" {{ old('jenis_kendaraan') == 'bus' ? 'selected' : '' }}>Bus</option>
                     </select>
                     @error('jenis_kendaraan')

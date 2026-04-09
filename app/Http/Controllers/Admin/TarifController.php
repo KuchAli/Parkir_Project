@@ -7,7 +7,6 @@ use App\Models\Tarif;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
 class TarifController extends Controller
 {
     public function index()
@@ -28,15 +27,13 @@ class TarifController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_kendaraan'         => 'required|string',
-            'tarif_per_jam'       => 'required|numeric|min:0',
+            'jenis_kendaraan' => 'required|in:mobil,motor,truck,bus',
+            'tarif_per_jam'   => 'required|numeric|min:0',
         ]);
 
         Tarif::create([
-            'jenis_kendaraan'     => $request->jenis_kendaraan,
+            'jenis_kendaraan' => $request->jenis_kendaraan,
             'tarif_per_jam'   => $request->tarif_per_jam,
-           
-            
         ]);
 
         return redirect()
@@ -46,21 +43,17 @@ class TarifController extends Controller
 
     public function edit(Tarif $tarif)
     {
-        $tarif= Tarif::findOrFail($tarif->id_tarif);
         return view('admin.tarif.edit', compact('tarif'));
     }
 
-
     public function update(Request $request, Tarif $tarif)
     {
-        $tarif = Tarif::findOrFail($tarif->id_tarif);
         $request->validate([
-            'tarif_per_jam'       => 'required|numeric|min:0',
+            'tarif_per_jam' => 'required|numeric|min:0',
         ]);
 
         $tarif->update([
-            'tarif_per_jam'   => $request->tarif_per_jam,
-            
+            'tarif_per_jam' => $request->tarif_per_jam,
         ]);
 
         return redirect()

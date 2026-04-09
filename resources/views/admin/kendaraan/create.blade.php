@@ -49,7 +49,7 @@
                     <select name="jenis_kendaraan" class="form-select @error('jenis_kendaraan') is-invalid @enderror">
                         <option value="mobil">Mobil</option>
                         <option value="motor">Motor</option>
-                        <option value="truk">Truk</option>
+                        <option value="truck">Truk</option>
                         <option value="bus">Bus</option>
                     </select>
                     @error('jenis_kendaraan')
