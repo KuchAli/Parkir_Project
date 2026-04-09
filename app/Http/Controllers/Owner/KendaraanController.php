@@ -29,9 +29,8 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'plat_nomor'       => 'required|string|max:15|unique:kendaraan,plat_nomor',
-            'jenis_kendaraan'  => 'required|string|',
+            'jenis_kendaraan'  => 'required|in:mobil,motor,truck,bus',
             'warna'            => 'nullable|string|max:20',
-            'user_id'          => 'required|exists:user,user_id'
 
         ]);
 
@@ -39,12 +38,12 @@ class KendaraanController extends Controller
             'plat_nomor'      => $request->plat_nomor,
             'jenis_kendaraan' => $request->jenis_kendaraan,
             'warna'           => $request->warna,
-            'user_id'         => $request->user_id, 
+            'user_id'         => Auth::id(), 
         ]);
 
         
         return redirect()
-            ->route('admin.kendaraan.index')
+            ->route('owner.kendaraan.index')
             ->with('success', 'Data kendaraan berhasil ditambahkan');
     }
 
@@ -71,7 +70,7 @@ class KendaraanController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.kendaraan.index')
+            ->route('owner.kendaraan.index')
             ->with('success', 'Data kendaraan berhasil diupdate');
     }
 

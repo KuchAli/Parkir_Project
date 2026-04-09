@@ -2,32 +2,17 @@
 @section('title', 'My Vehicle - Add New Vehicle')
 
 @section('content')
-<div class="container">
+<div class="container me-4">
     <div class="card shadow-sm">
         <div class="card-header">
             <h5>Add Vehicle Data</h5>
         </div>
 
-        <div class="card-body m-5">
+        <div class="card-body m-5 ">
             <form action="{{ route('owner.kendaraan.store') }}" method="POST">
                 @csrf
 
-                {{-- Select User --}}
-                <div class="mb-3">
-                    <label class="form-label">Owner</label>
-                    <select name="user_id" class="form-select @error('user_id') is-invalid @enderror">
-                        <option value="">-- Select User --</option>
-                        @foreach ($users as $user)
-                            <option value="{{ $user->user_id }}"
-                                {{ old('user_id') == $user->user_id ? 'selected' : '' }}>
-                                {{ $user->nama_lengkap }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('user_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+            
 
                 {{-- Plate Number --}}
                 <div class="mb-3">
@@ -36,7 +21,7 @@
                     </label>
                     <input type="text" name="plat_nomor"
                         class="form-control @error('plat_nomor') is-invalid @enderror"
-                        value="{{ old('plat_nomor') }}">
+                        value="{{ old('plat_nomor') }}" placeholder=" B 1234 ABC">
                     @error('plat_nomor')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -72,7 +57,7 @@
                 
 
                 {{-- Aksi --}}
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end mt-4">
                     <a href="{{ route('owner.kendaraan.index') }}" class="btn btn-secondary me-2">Kembali</a>
                     <button class="btn btn-primary">Simpan</button>
                 </div>

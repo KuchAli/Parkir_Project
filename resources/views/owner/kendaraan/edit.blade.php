@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
+<div class="container me-4">
     <div class="card shadow-sm justify-content-center">
         <div class="card-header">
             <h5>Edit Vehicle Data </h5>
