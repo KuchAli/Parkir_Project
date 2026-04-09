@@ -216,13 +216,87 @@
         .nav-strip.active::after {
             width: 100%;
         }
-        
+
+       .navbar {
+            background-color: #4b5563 !important; /* abu gelap modern */
+        }
+
+        .nav-link {
+            border-radius: 10px;
+            padding: 6px 12px;
+            transition: all 0.25s ease;
+            opacity: 0.85;
+            transition: 0.2s;
+            padding: 6px 10px;
+            white-space: nowrap;
+        }
+       
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar-nav {
+            flex-wrap: nowrap;
+           
+            gap: 6px;
+        }
+
+        .dropdown-menu {
+            position: absolute !important;
+            right: 0;
+            left: auto;
+        }
+
         
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 568px) {
             .sidebar {
                 min-height: auto;
                 position: static;
+            }
+            .navbar-nav {
+                flex-direction: row;
+                gap: 7px !important;;
+            }
+
+            .nav-text {
+                display: none;
+            }
+
+            .nav-link {
+                padding: 7px 12px;
+            }
+
+            .navbar {
+                padding: 8px 7px;
+            }
+            .navbar-brand {
+                font-size: 16px;
+                max-width: 150px;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .navbar .rounded-circle {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 12px;
+            }
+            
+            .navbar .dropdown-toggle span {
+                display: none;
+            }
+           .dropdown-menu {
+                position: absolute !important;
+                right: 0;
+                left: auto;
             }
         }
     </style>
