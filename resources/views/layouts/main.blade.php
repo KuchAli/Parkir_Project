@@ -217,9 +217,7 @@
             width: 100%;
         }
 
-       .navbar {
-            background-color: #4b5563 !important; /* abu gelap modern */
-        }
+      
 
         .nav-link {
             border-radius: 10px;
