@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kendaraan', function (Blueprint $table) {
            $table->bigIncrements('id_kendaraan')->primary();
             $table->string('plat_nomor', 15);
-            $table->string('jenis_kendaraan', 20);
+            $table->enum('jenis_kendaraan', ['motor', 'mobil', 'truck', 'bus']);
             $table->string('warna', 20);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

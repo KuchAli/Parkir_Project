@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kendaraan');
             $table->dateTime('waktu_masuk');
             $table->dateTime('waktu_keluar')->nullable();
-            $table->unsignedBigInteger('id_tarif');
+            $table->unsignedBigInteger('id_tarif')->nullable();
             $table->integer('durasi_jam')->nullable();
             $table->decimal('biaya_total', 10, 0)->nullable();
-            $table->enum('status', ['masuk', 'keluar']);
+            $table->enum('status', ['masuk', 'keluar', 'booking']);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('id_area');
             $table->timestamps();

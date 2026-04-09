@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tarifs', function (Blueprint $table) {
             $table->bigIncrements('id_tarif')->primary();
-            $table->enum('jenis_kendaraan', ['motor', 'mobil', 'lainnya']);
+            $table->enum('jenis_kendaraan', ['motor', 'mobil', 'truck', 'bus']);
             $table->decimal('tarif_per_jam', 10, 0);
             $table->timestamps();
         });
