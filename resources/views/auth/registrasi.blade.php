@@ -142,7 +142,7 @@
                         
                         <div class="text-center">
                             <p class="mb-0">Have account? 
-                                <a href="{{ route('login') }}" class="text-decoration-none">Login here</a>
+                                <a href="{{ route('login') }}" class="text-decoration-none">Login here!</a>
                             </p>
                         </div>
                     </form>

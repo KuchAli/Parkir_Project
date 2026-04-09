@@ -100,7 +100,7 @@
                         
                         <div class="text-center">
                             <p class="mb-0">Don't have account? 
-                                <a href="{{ route('register') }}" class="text-decoration-none">Register disini</a>
+                                <a href="{{ route('register') }}" class="text-decoration-none">Register here!</a>
                             </p>
                         </div>
                     </form>
