@@ -63,6 +63,14 @@
                         <span class="nav-text">My Vehicle</span>
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link nav-strip d-flex align-items-center gap-2 {{ request()->routeIs('owner.reservasi.index') ? 'active fw-semibold' : '' }}"
+                       href="{{ route('owner.reservasi.index') }}">
+                        <i class="bi bi-calendar-check"></i>
+                        <span class="nav-text">My Booking</span>
+                    </a>
+                </li>
 
             </ul>
         </div>
