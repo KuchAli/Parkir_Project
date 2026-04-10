@@ -67,7 +67,7 @@
                                             </a>
                                         </div>
                                     @endif
-                                    @if($status == 'Upcoming')
+                                    @if($item->status == 'booking')
                                         <form action="{{ route('owner.reservasi.destroy', $item->id_parkir) }}" method="POST">
                                             @csrf
                                             @method('DELETE')

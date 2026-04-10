@@ -102,7 +102,7 @@ class AreaController extends Controller
 
         foreach ($areas as $area) {
             $real = Transaksi::where('id_area', $area->id)
-                            ->whereIn('status', ['masuk', 'keluar'])
+                            ->whereIn('status', ['booking','masuk', 'keluar'])
                             ->count();
 
             $area->update(['terisi' => $real]);
