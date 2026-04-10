@@ -55,10 +55,12 @@
                                 <td>{{ $t->waktu_masuk }}</td>
                                 <td>{{ $t->waktu_keluar ?? '-' }}</td>
                                 <td>
-                                    @if($t->status == 'masuk')
-                                        <span class="badge bg-warning text-dark">Parkir</span>
+                                    @if($t->status == 'booking')
+                                        <span class="badge bg-warning text-dark">Booking</span>
+                                    @elseif($t->status == 'masuk')
+                                        <span class="badge bg-success">Parked</span>
                                     @else
-                                        <span class="badge bg-success">Selesai</span>
+                                        <span class="badge bg-secondary">Finished</span>
                                     @endif
                                 </td>
                                 <td>
@@ -74,11 +76,18 @@
                                         {{-- Tombol Detail --}}
                                         <a href="{{ route('petugas.transaksi.detail', $t->id_parkir) }}"
                                            class="btn btn-sm btn-info text-white">
-                                            Detail
+                                            <i class="bi bi-three-dots"></i>
                                         </a>
 
                                         {{-- Tombol Cetak Struk --}}
-                                        @if($t->status == 'keluar')
+                                        @if($t->status == 'booking')
+                                            <form action="{{ route('petugas.transaksi.accept', $t->id_parkir) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-sm btn-success">
+                                                    <i class="bi bi-check-lg"></i>
+                                                </button>
+                                            </form>
+                                        @elseif($t->status == 'keluar')
                                             <a href="{{ route('petugas.parkir.struk', $t->id_parkir) }}"
                                                class="btn btn-sm btn-primary"
                                               >

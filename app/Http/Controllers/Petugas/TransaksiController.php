@@ -145,4 +145,29 @@ class TransaksiController extends Controller
                 ->with('success', 'Kendaraan keluar. Total bayar: Rp ' . number_format($biaya_total, 0, ',', '.'));
     }
 
+    public function acceptBooking($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        if ($transaksi->status != 'booking') {
+            return back()->with('error', 'Hanya booking yang bisa di-accept');
+        }
+
+        $area = AreaParkir::findOrFail($transaksi->id_area);
+
+        // cek kapasitas
+        if ($area->terisi >= $area->kapasitas) {
+            return back()->with('error', 'Parkir penuh!');
+        }
+
+        $transaksi->update([
+            'status' => 'masuk',
+            'waktu_masuk' => now()
+        ]);
+
+        $area->increment('terisi');
+
+        return back()->with('success', 'Booking berhasil diterima');
+    }
+
 }

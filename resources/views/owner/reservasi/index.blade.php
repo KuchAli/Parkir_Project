@@ -10,19 +10,7 @@
             <div class="row mb-4">
                 @forelse($booking as $item)
 
-                    @php
-                        $now = now();
-                        if ($now < $item->waktu_masuk) {
-                            $status = 'Upcoming';
-                            $badge = 'primary';
-                        } elseif ($now >= $item->waktu_masuk && $now <= $item->waktu_keluar) {
-                            $status = 'Active';
-                            $badge = 'success';
-                        } else {
-                            $status = 'Finished';
-                            $badge = 'secondary';
-                        }
-                    @endphp
+                   
 
                     <div class="col-md-6 mb-4">
                         <div class="card shadow-sm border-0 h-100">
@@ -35,9 +23,13 @@
                                 {{-- Header --}}
                                 <div class="d-flex justify-content-between">
                                     <h6 class="fw-bold">PKR-{{ str_pad($item->id_parkir, 3, '0', STR_PAD_LEFT) }}</h6>
-                                    <span class="badge bg-{{ $badge }}">
-                                        {{ $status }}
-                                    </span>
+                                    @if($item->status == 'booking')
+                                        <span class="badge bg-primary">Upcoming</span>
+                                    @elseif($item->status == 'masuk')
+                                        <span class="badge bg-success">Parked</span>
+                                    @else
+                                        <span class="badge bg-secondary">Finished</span>
+                                    @endif
                                 </div>
 
                                 <hr>

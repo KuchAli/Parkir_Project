@@ -40,10 +40,12 @@
         <div class="row mb-2">
             <div class="col-md-4 fw-bold">Status:</div>
             <div class="col-md-8">
-                @if($transaksi->status == 'masuk')
-                    <span class="badge bg-warning text-dark">Parkir</span>
+                @if($transaksi->status == 'booking')
+                    <span class="badge bg-warning text-dark">Booking</span>
+                @elseif($transaksi->status == 'masuk')
+                    <span class="badge bg-success">Parked</span>
                 @else
-                    <span class="badge bg-success">Selesai</span>
+                    <span class="badge bg-success">Finished</span>
                 @endif
             </div>
         </div>
