@@ -31,6 +31,8 @@ Route::prefix('petugas')
                 ->name('transaksi.detail');
             Route::post('/transaksi/{transaksi}/accept-booking', [TransaksiController::class, 'acceptBooking'])
                 ->name('transaksi.accept');
+            Route::post('/transaksi/{transaksi}/cancel-booking', [TransaksiController::class, 'cancelBooking'])
+                ->name('transaksi.cancel');
     });
 
 ?>

@@ -165,9 +165,25 @@ class TransaksiController extends Controller
             'waktu_masuk' => now()
         ]);
 
-        $area->increment('terisi');
-
         return back()->with('success', 'Booking berhasil diterima');
     }
 
+    public function cancelBooking($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        if ($transaksi->status != 'booking') {
+            return back()->with('error', 'Hanya booking yang bisa dibatalkan');
+        }
+
+        $area = AreaParkir::findOrFail($transaksi->id_area);
+
+        $transaksi->delete();
+
+        // ✅ balikin slot
+        $area->decrement('terisi');
+
+        return back()->with('success', 'Booking berhasil dibatalkan');
+
+}
 }

@@ -87,6 +87,12 @@
                                                     <i class="bi bi-check-lg"></i>
                                                 </button>
                                             </form>
+                                            <form action="{{ route('petugas.transaksi.cancel', $t->id_parkir) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-sm btn-danger">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </button>
+                                            </form>
                                         @elseif($t->status == 'keluar')
                                             <a href="{{ route('petugas.parkir.struk', $t->id_parkir) }}"
                                                class="btn btn-sm btn-primary"
