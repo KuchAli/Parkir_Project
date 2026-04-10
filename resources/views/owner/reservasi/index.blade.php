@@ -15,7 +15,7 @@
                     <div class="col-md-6 mb-4">
                         <div class="card shadow-sm border-0 h-100">
                             <div class="card-body">
-                                <div class="container">
+                                
                             
 
                             
@@ -55,20 +55,15 @@
 
                                 <hr>
                                 
-                                
+                                @if(!$hasActiveBooking && $loop->first)
+                                    <a href="{{ route('owner.reservasi.create') }}" class="btn btn-primary btn-sm">
+                                        + Make Booking
+                                    </a>
+                                @endif
                                 {{-- Action --}}
-                                <div class="d-flex justify-content-end">
-                                    <strong class="me-auto px-3 py-2">Lets Make a Booking!</strong>
-                                    {{-- Tombol muncul hanya jika semua booking finished --}}
-                                    @if(!$hasActiveBooking)
-                                        <div class="mb-3 text-end">
-                                            <a href="{{ route('owner.reservasi.create') }}" class="btn btn-primary">
-                                                + Make Booking
-                                            </a>
-                                        </div>
-                                    @endif
+                                <div class="d-flex justify-content-between align-items-center">
                                     @if($item->status == 'booking')
-                                        <form action="{{ route('owner.reservasi.destroy', $item->id_parkir) }}" method="POST">
+                                        <form action="{{ route('owner.reservasi.cancel', $item->id_parkir) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger">
@@ -92,6 +87,11 @@
                     </div>
 
                 @endforelse
+
+                <div class="mt-3">
+                    {{ $booking -> links() }}
+                </div>
+
             </div>
         </div>
     </div>

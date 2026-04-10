@@ -20,7 +20,8 @@ class BookingController extends Controller
         $booking = Transaksi::where('user_id', Auth::id())
         ->whereNotNull('waktu_masuk')
         ->orderBy('waktu_masuk', 'desc')
-        ->get();
+        ->paginate(5);
+
 
         // cek apakah masih ada booking aktif / upcoming
         $hasActiveBooking = $booking->contains(function ($item) {
@@ -80,6 +81,8 @@ class BookingController extends Controller
             'status' => 'booking'
         ]);
 
+        $area->increment('terisi');
+
         return redirect()->route('owner.reservasi.index')
             ->with('success', 'Booking created successfully!');
     }
@@ -138,19 +141,31 @@ class BookingController extends Controller
             'message' => 'Slot tersedia'
         ]);
     }
-    public function destroy($id)
-    {
-            $booking = Transaksi::where('user_id', Auth::id())->findOrFail($id);
 
-        // Hanya bisa cancel jika status masih booking/upcoming
-        if ($booking->status != 'booking') {
-            return back()->with('error', 'Booking tidak bisa dibatalkan!');
+    public function cancelBooking($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        // pastikan milik user sendiri
+        if ($transaksi->user_id != Auth::id()) {
+            abort(403);
         }
 
-        $booking->delete();
+        if ($transaksi->status != 'booking') {
+            return back()->with('error', 'Tidak bisa dibatalkan');
+        }
 
-        return back()->with('success', 'Booking berhasil dibatalkan!');
+        $area = AreaParkir::findOrFail($transaksi->id_area);
+
+        $transaksi->delete();
+
+        // ✅ balikin slot
+        $area->decrement('terisi');
+
+        return back()->with('success', 'Booking berhasil dibatalkan');
     }
+
+
 }
 
 

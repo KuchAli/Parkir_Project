@@ -19,6 +19,7 @@ Route::prefix('owner')
 
         Route::resource('reservasi', BookingController::class);
 
-        Route::delete('reservasi/{id}', [BookingController::class, 'destroy'])
-                ->name('reservasi.destroy');
+        Route::delete('reservasi/{id}/cancel', [BookingController::class, 'cancelBooking'])
+                ->name('reservasi.cancel');
+        
 });
