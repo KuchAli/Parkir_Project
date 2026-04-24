@@ -18,40 +18,40 @@ pengguna kendaraan bisa reservasi tempat parkir kendaraan mereka.
 
 ## Persiapan dan Instalasi
 
-   1. **Clone Repository**
+1. **Clone Repository**
       ```bash
       git clone https://github.com/KuchAli/Parkir_Project.git
 
       cd Parkir_Project
       ```
 
-    2. **Install Dependensi Backend**
+2. **Install Dependensi Backend**
         ```bash
         composer install
         ```
     
-    3. **Copy File Environment**
+3. **Copy File Environment**
         ```bash
         cp .env.example .env
         ```
 
-    4. **Konfigurasi File .env**
-        - Sesuaikan konfigurasi database, dsb
+4. **Konfigurasi File .env**
+    - Sesuaikan konfigurasi database, dsb
 
-    5. **Generate Application Key**
-        ```bash
-        php artisan key:generate
-        ```
+5. **Generate Application Key**
+    ```bash
+    php artisan key:generate
+    ```
 
-    6. **Migrasi Database**
-        ```bash
-        php artisan migrate
-        ```
+6. **Migrasi Database**
+    ```bash
+    php artisan migrate
+    ```
 
-    7. **Jalankan Aplikasi**
-        ```bash 
-        php artisan serve
-        ```
+7. **Jalankan Aplikasi**
+    ```bash 
+    php artisan serve
+    ```
 
 ## Contoh Penggunaan
 
