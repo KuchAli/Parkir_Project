@@ -26,14 +26,14 @@ pengguna kendaraan bisa reservasi tempat parkir kendaraan mereka.
       ```
 
 2. **Install Dependensi Backend**
-        ```bash
-        composer install
-        ```
+    ```bash
+    composer install
+    ```
     
 3. **Copy File Environment**
-        ```bash
-        cp .env.example .env
-        ```
+    ```bash
+    cp .env.example .env
+    ```
 
 4. **Konfigurasi File .env**
     - Sesuaikan konfigurasi database, dsb
